@@ -4,6 +4,6 @@ module.exports = async function (req, res, proceed) {
       proceed();
   }
   else {
-    res.forbidden();
+    res.status(403).json({ error: 'Unauthorized Action' });
   }  
 };

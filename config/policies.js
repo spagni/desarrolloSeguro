@@ -19,10 +19,8 @@ module.exports.policies = {
 
   '*': 'verifyToken',
   AuthController: {
-    '*': true
-  },
-  TestController: {
-    'hello': ['verifyToken','isAdmin']
+    '*': true,
+    'signUpWithRole': ['verifyToken','isAdmin']
   }
 
 };

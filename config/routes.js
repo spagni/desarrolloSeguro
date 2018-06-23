@@ -10,12 +10,6 @@
 
 module.exports.routes = {
 
-  'GET /': 'TestController.hello',
-
-  'POST /auth/signUp': 'AuthController.signUp',
-  'POST /auth/login': 'AuthController.login'
-
-
   /***************************************************************************
   *                                                                          *
   * More custom routes here...                                               *
@@ -31,17 +25,10 @@ module.exports.routes = {
   //  ╔═╗╔═╗╦  ╔═╗╔╗╔╔╦╗╔═╗╔═╗╦╔╗╔╔╦╗╔═╗
   //  ╠═╣╠═╝║  ║╣ ║║║ ║║╠═╝║ ║║║║║ ║ ╚═╗
   //  ╩ ╩╩  ╩  ╚═╝╝╚╝═╩╝╩  ╚═╝╩╝╚╝ ╩ ╚═╝
-
-
-
-  //  ╦ ╦╔═╗╔╗ ╦ ╦╔═╗╔═╗╦╔═╔═╗
-  //  ║║║║╣ ╠╩╗╠═╣║ ║║ ║╠╩╗╚═╗
-  //  ╚╩╝╚═╝╚═╝╩ ╩╚═╝╚═╝╩ ╩╚═╝
-
-
-  //  ╔╦╗╦╔═╗╔═╗
-  //  ║║║║╚═╗║
-  //  ╩ ╩╩╚═╝╚═╝
+  //Authentication Routes
+  'POST /auth/signUp': 'AuthController.signUp',
+  'POST /auth/signUpWithRole': 'AuthController.signUpWithRole',
+  'POST /auth/login': 'AuthController.login'
 
 
 };

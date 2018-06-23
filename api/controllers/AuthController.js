@@ -34,6 +34,38 @@ module.exports = {
     async signUp(req, res) {
         try{
             const user = req.body;
+
+            if (!user.email || !user.password || !user.fullName) {
+                return res.status(400).json({ error: 'Missing required fields.' });
+            }
+
+            user.password = bcrypt.hashSync(req.body.password, 10);
+            const newUser = await User.create({
+                email: user.email.toLowerCase().trim(),
+                fullName: user.fullName,
+                password: user.password,
+                role: 'user'
+            }).fetch();
+
+            res.json(newUser);
+        }
+        catch(err){
+            res.status(500).json(err);
+        }
+    },
+
+    async signUpWithRole(req, res) {
+        try{
+            const user = req.body;
+
+            if (!user.email || !user.password || !user.fullName || !user.role) {
+                return res.status(400).json({ error: 'Missing required fields.' });
+            }
+
+            if (user.role !== 'admin' && user.role !== 'user' && user.role !== 'doctor' && user.role !== 'assistant') {
+                return res.status(400).json({ error: 'Missing required fields.' });
+            }
+
             user.password = bcrypt.hashSync(req.body.password, 10);
             const newUser = await User.create({
                 email: user.email.toLowerCase().trim(),
