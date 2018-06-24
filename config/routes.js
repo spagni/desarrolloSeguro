@@ -28,7 +28,9 @@ module.exports.routes = {
   //Authentication Routes
   'POST /auth/signUp': 'AuthController.signUp',
   'POST /auth/signUpWithRole': 'AuthController.signUpWithRole',
-  'POST /auth/login': 'AuthController.login'
+  'POST /auth/login': 'AuthController.login',
+  //Patient Routes
+  'POST /patient': 'PatientController.setPatientData'
 
 
 };

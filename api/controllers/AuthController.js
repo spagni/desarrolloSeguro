@@ -27,7 +27,7 @@ module.exports = {
             return res.status(401).json({ error: 'Access Denied' });
         }
 
-        const userToken = jwt.sign({email: user.email, role: user.role}, keys.jwtSecret);
+        const userToken = jwt.sign({email: user.email, sub: user.id, role: user.role}, keys.jwtSecret);
         res.json({ token: userToken });
     },
 
