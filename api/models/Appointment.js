@@ -1,5 +1,5 @@
 /**
- * Patient.js
+ * Appointment.js
  *
  * @description :: A model definition.  Represents a database table/collection/etc.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -12,28 +12,18 @@ module.exports = {
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
-    dni: {
+    date: {
       type: 'number',
       required: true,
-      unique: true,
-      description: 'Full representation of the user\'s dni'
+      description: 'Date of the appointment'
     },
-    coverage: {
-      type: 'string',
+    patient: {
+      model: 'patient',
       required: true
     },
-    coverageNumber: {
-      type: 'number',
+    doctor: {
+      model: 'doctor',
       required: true
-    },
-    user: {
-      model: 'user',
-      required: true,
-      unique: true
-    },
-    appointments: {
-      collection: 'appointment',
-      via: 'patient'
     }
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗

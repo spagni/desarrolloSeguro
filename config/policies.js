@@ -24,6 +24,11 @@ module.exports.policies = {
   },
   PatientController: {
     'setPatientData': ['verifyToken','canUpdatePatientData']
+  },
+  AppointmentController: {
+    'newAppointment': 'verifyToken',
+    'getPatientAppointments': 'verifyToken',
+    'getDoctorAppointments': ['verifyToken','canGetDoctorAppointments']
   }
 
 };

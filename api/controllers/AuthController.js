@@ -66,6 +66,10 @@ module.exports = {
                 return res.status(400).json({ error: 'Missing required fields.' });
             }
 
+            if (user.role === 'doctor' && !user.registrationId) {
+                return res.status(400).json({ error: 'Missing doctor registration ID.' });
+            }
+
             user.password = bcrypt.hashSync(req.body.password, 10);
             const newUser = await User.create({
                 email: user.email.toLowerCase().trim(),
@@ -74,7 +78,17 @@ module.exports = {
                 role: user.role
             }).fetch();
 
-            res.json(newUser);
+            if (user.role === 'doctor') {
+                
+                const newDoctor = await Doctor.create({
+                    user: newUser.id,
+                    registrationId: user.registrationId
+                }).fetch();
+                //Devuelvo el doctor con el usuario adentro
+                return res.json(await Doctor.find({ id: newDoctor.id }).populate('user'));
+            }
+
+            return res.json(newUser);
         }
         catch(err){
             res.status(500).json(err);
