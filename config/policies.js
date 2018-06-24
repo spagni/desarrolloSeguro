@@ -21,6 +21,9 @@ module.exports.policies = {
   AuthController: {
     '*': true,
     'signUpWithRole': ['verifyToken','isAdmin']
+  },
+  PatientController: {
+    'setPatientData': ['verifyToken','canUpdatePatientData']
   }
 
 };
