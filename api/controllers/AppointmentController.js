@@ -35,7 +35,7 @@ module.exports = {
         try {
             const data = req.body;
             const dateParam = new Date(data.date);
-
+            //Verifico si existe un turno para el doctor en ese TimeSlot
             const existsAppointment = await Appointment.findOne({
                 year: dateParam.getFullYear(),
                 month: dateParam.getMonth()+1,
@@ -47,7 +47,7 @@ module.exports = {
             if (existsAppointment) {
                 return res.status(409).json({ error: 'TimeSlot unavailabe' });
             }
-            
+            //Creo el turno
             const newAppointment = await Appointment.create({
                 year: dateParam.getFullYear(),
                 month: dateParam.getMonth()+1,
@@ -74,6 +74,7 @@ module.exports = {
                 patientId = patient.id;
             }
             else {
+                //Si lo llama un admin o secretaria, tiene que mandar el id de paciente
                 patientId = req.body.patientId;
             }
 
