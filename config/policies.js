@@ -29,6 +29,7 @@ module.exports.policies = {
     'newAppointment': 'verifyToken',
     'getPatientAppointments': 'verifyToken',
     'getAppointmentsByDate': 'verifyToken',
+    'deleteAppointment': 'verifyToken',
     'getDoctorAppointments': ['verifyToken','canGetDoctorAppointments']
   }
 

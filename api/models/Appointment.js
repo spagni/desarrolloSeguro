@@ -31,7 +31,7 @@ module.exports = {
     },
     timeSlot: {
       type: 'number',
-      min: 9,
+      min: 8,
       max: 18,
       required: true
     },

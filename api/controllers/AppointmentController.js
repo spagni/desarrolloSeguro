@@ -9,16 +9,17 @@ module.exports = {
 
     async getAppointmentsByDate(req, res) {
         try {
-            if (!req.body.date) {
+            if (!req.body.date || !req.body.doctorId) {
                 return res.status(400).json({ error: 'Missing required fields.' });
             }
 
             const dateParam = new Date(req.body.date);
-
+            //Devuelvo los turnos ocupados para un día específico y para un doctor en particular
             const appointments = await Appointment.find({
                 year: dateParam.getFullYear(),
                 month: dateParam.getMonth()+1,
-                day: dateParam.getDate()
+                day: dateParam.getDate(),
+                doctor: req.body.doctorId
             });
             
             const appointmentsTimeSlots = appointments.map(x => x.timeSlot);
@@ -68,17 +69,19 @@ module.exports = {
 
     async getPatientAppointments(req, res) {
         try {
-            const {patientId} = req.body;
+            if (req.user.role === 'user') {
+                const patient = await Patient.findOne({user: req.user.sub});
+                patientId = patient.id;
+            }
+            else {
+                patientId = req.body.patientId;
+            }
 
             if (!patientId) {
-                return res.status(400).json({ error: 'Missing required fields.' });
+                return res.status(400).json({ error: 'Missing patient Id' });
             }
             
-            const patientAppointments = await Appointment.find({ patient: patientId });
-
-            //FALTA RECUPERAR DATOS DE DOCTOR Y PACIENTE
-            //patientAppointments.doctor = await Doctor.findOne({id: data.doctorId});
-            //patientAppointments.patient = await Patient.findOne({id: data.patientId});
+            const patientAppointments = await Appointment.find({ patient: patientId }).populate('doctor');
             
             res.json(patientAppointments);
         }
@@ -95,9 +98,34 @@ module.exports = {
                 return res.status(400).json({ error: 'Missing required fields.' });
             }
 
-            const doctorAppointments = await Appointment.find({ doctor: doctorId });
+            const doctorAppointments = await Appointment.find({ doctor: doctorId }).populate('patient');
 
             res.json(doctorAppointments);
+        }
+        catch(err) {
+            res.status(500).json(err);
+        }
+    },
+
+    async deleteAppointment(req, res) {
+        try {
+            if (req.user.role === 'user') {
+                const patient = await Patient.findOne({user: req.user.sub});
+                patientId = patient.id;
+            }
+            else {
+                patientId = req.body.patientId;
+            }
+
+            if (!patientId) {
+                return res.status(400).json({ error: 'Missing patient Id' });
+            }
+
+            await Appointment.destroy({
+                id: req.body.appointmentId,
+                patient: patientId
+            });
+            res.status(200).send('Appointment removed');
         }
         catch(err) {
             res.status(500).json(err);
