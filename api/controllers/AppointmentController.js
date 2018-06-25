@@ -7,12 +7,38 @@
 
 module.exports = {
 
+    async getAppointmentsByDate(res, res) {
+        try {
+            if (!req.body.date) {
+                return res.status(400).json({ error: 'Missing required fields.' });
+            }
+
+            const dateParam = new Date(req.body.date);
+
+            const appointments = await Appointment.find({
+                year: dateParam.getFullYear(),
+                month: dateParam.getMonth(),
+                day: dateParam.getDate()
+            });
+            //hacer un .map para devolver solo el timeslot
+            res.json(appointments);
+
+        }
+        catch(err) {
+            res.status(500).json(err);
+        }
+    },
+
     async newAppointment(req, res) {
         try {
             const data = req.body;
+            const dateParam = new Date(data.date);
 
             const newAppointment = await Appointment.create({
-                date: data.date,
+                year: dateParam.getFullYear(),
+                month: dateParam.getMonth(),
+                day: dateParam.getDate(),
+                timeSlot: data.timeSlot,
                 doctor: data.doctorId,
                 patient: data.patientId
             }).fetch();
