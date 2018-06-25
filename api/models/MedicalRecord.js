@@ -12,6 +12,14 @@ module.exports = {
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
+    patient: {
+      model: 'patient',
+      unique: true
+    },
+    appointments: {
+      collection: 'appointmentDetail',
+      via: 'medicalRecord'
+    }
 
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗

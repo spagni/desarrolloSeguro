@@ -34,7 +34,12 @@ module.exports = {
     appointments: {
       collection: 'appointment',
       via: 'patient'
+    },
+    medicalRecord: {
+      collection: 'medicalRecord',
+      via: 'patient'
     }
+
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗

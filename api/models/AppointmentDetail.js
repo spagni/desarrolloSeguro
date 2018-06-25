@@ -20,6 +20,9 @@ module.exports = {
     appointment:{
       model: 'appointment',
       required: true,
+    },
+    medicalRecord: {
+      model: 'medicalRecord'
     }
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
