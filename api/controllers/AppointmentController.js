@@ -7,7 +7,7 @@
 
 module.exports = {
 
-    async getAppointmentsByDate(res, res) {
+    async getAppointmentsByDate(req, res) {
         try {
             if (!req.body.date) {
                 return res.status(400).json({ error: 'Missing required fields.' });
@@ -17,11 +17,12 @@ module.exports = {
 
             const appointments = await Appointment.find({
                 year: dateParam.getFullYear(),
-                month: dateParam.getMonth(),
+                month: dateParam.getMonth()+1,
                 day: dateParam.getDate()
             });
-            //hacer un .map para devolver solo el timeslot
-            res.json(appointments);
+            
+            const appointmentsTimeSlots = appointments.map(x => x.timeSlot);
+            res.json(appointmentsTimeSlots);
 
         }
         catch(err) {
@@ -34,17 +35,29 @@ module.exports = {
             const data = req.body;
             const dateParam = new Date(data.date);
 
+            const existsAppointment = await Appointment.findOne({
+                year: dateParam.getFullYear(),
+                month: dateParam.getMonth()+1,
+                day: dateParam.getDate(),
+                timeSlot: data.timeSlot,
+                doctor: data.doctorId
+            });
+
+            if (existsAppointment) {
+                return res.status(409).json({ error: 'TimeSlot unavailabe' });
+            }
+            
             const newAppointment = await Appointment.create({
                 year: dateParam.getFullYear(),
-                month: dateParam.getMonth(),
+                month: dateParam.getMonth()+1,
                 day: dateParam.getDate(),
                 timeSlot: data.timeSlot,
                 doctor: data.doctorId,
                 patient: data.patientId
             }).fetch();
             
-            newAppointment.doctor = await Doctor.findOne({id: data.doctorId});
-            newAppointment.patient = await Patient.findOne({id: data.patientId});
+            newAppointment.doctor = await Doctor.findOne({id: data.doctorId}).populate('user');
+            newAppointment.patient = await Patient.findOne({id: data.patientId}).populate('user');
             //Devuelvo el nuevo turno con paciente y doctor
             res.json(newAppointment);
         }
