@@ -16,9 +16,9 @@ module.exports = {
             const dateParam = new Date(req.body.date);
             //Devuelvo los turnos ocupados para un día específico y para un doctor en particular
             const appointments = await Appointment.find({
-                year: dateParam.getFullYear(),
-                month: dateParam.getMonth()+1,
-                day: dateParam.getDate(),
+                year: dateParam.getUTCFullYear(),
+                month: dateParam.getUTCMonth()+1,
+                day: dateParam.getUTCDate(),
                 doctor: req.body.doctorId
             });
             
@@ -37,9 +37,9 @@ module.exports = {
             const dateParam = new Date(data.date);
             //Verifico si existe un turno para el doctor en ese TimeSlot
             const existsAppointment = await Appointment.findOne({
-                year: dateParam.getFullYear(),
-                month: dateParam.getMonth()+1,
-                day: dateParam.getDate(),
+                year: dateParam.getUTCFullYear(),
+                month: dateParam.getUTCMonth()+1,
+                day: dateParam.getUTCDate(),
                 timeSlot: data.timeSlot,
                 doctor: data.doctorId
             });
@@ -47,11 +47,12 @@ module.exports = {
             if (existsAppointment) {
                 return res.status(409).json({ error: 'TimeSlot unavailabe' });
             }
+            
             //Creo el turno
             const newAppointment = await Appointment.create({
-                year: dateParam.getFullYear(),
-                month: dateParam.getMonth()+1,
-                day: dateParam.getDate(),
+                year: dateParam.getUTCFullYear(),
+                month: dateParam.getUTCMonth()+1,
+                day: dateParam.getUTCDate(),
                 timeSlot: data.timeSlot,
                 doctor: data.doctorId,
                 patient: data.patientId
