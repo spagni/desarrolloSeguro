@@ -47,11 +47,9 @@ module.exports = {
     *                                                                          *
     ***************************************************************************/
     default: {
-      productionMongo: {
-        adapter: 'sails-mongo',
-        //url: 'mongodb://localhost:27017/consultorioDB',
-        url: 'mongodb://admin:qwer1234@ds223161.mlab.com:23161/heroku_mz94kqhx'
-      }
+      adapter: 'sails-mongo',
+      //url: 'mongodb://localhost:27017/consultorioDB',
+      url: 'mongodb://admin:qwer1234@ds223161.mlab.com:23161/heroku_mz94kqhx'
       
       //--------------------------------------------------------------------------
       //  /\   To avoid checking it in to version control, you might opt to set
@@ -83,7 +81,7 @@ module.exports = {
 
 
   models: {
-    connection: 'productionMongo',
+    
     /***************************************************************************
     *                                                                          *
     * To help avoid accidents, Sails automatically sets the automigration      *
