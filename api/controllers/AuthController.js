@@ -93,6 +93,12 @@ module.exports = {
         catch(err){
             res.status(500).json(err);
         }
+    },
+
+    async currentUser(req, res) {
+        const user = User.findOne({ id: req.user.sub });
+
+        res.json(user);
     }
 };
 
