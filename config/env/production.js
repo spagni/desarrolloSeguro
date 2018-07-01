@@ -49,7 +49,7 @@ module.exports = {
     default: {
       adapter: 'sails-mongo',
       //url: 'mongodb://localhost:27017/consultorioDB',
-      url: 'mongodb://admin:qwer1234@ds223161.mlab.com:23161/heroku_mz94kqhx'
+      url: process.env.MONGODB_URI
       
       //--------------------------------------------------------------------------
       //  /\   To avoid checking it in to version control, you might opt to set
@@ -186,8 +186,8 @@ module.exports = {
     * > (For a full list, see https://sailsjs.com/plugins/sessions)            *
     *                                                                          *
     ***************************************************************************/
-    adapter: 'connect-mongo',
-    url: 'mongodb://admin:qwer1234@ds223161.mlab.com:23161/heroku_mz94kqhx',
+    //adapter: 'connect-mongo',
+    //url: 'mongodb://admin:qwer1234@ds223161.mlab.com:23161/heroku_mz94kqhx',
     //--------------------------------------------------------------------------
     // /\   OR, to avoid checking it in to version control, you might opt to
     // ||   set sensitive credentials like this using an environment variable.
