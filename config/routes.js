@@ -36,7 +36,10 @@ module.exports.routes = {
   'POST /patientAppointments': 'AppointmentController.getPatientAppointments',
   'POST /doctorAppointments': 'AppointmentController.getDoctorAppointments',
   'POST /appointmetByDate': 'AppointmentController.getAppointmentsByDate',
-  'POST /deleteAppointment': 'AppointmentController.deleteAppointment'
+  'POST /deleteAppointment': 'AppointmentController.deleteAppointment',
+  //Doctor routes
+  'POST /doctors': 'DoctorController.getAvailableDoctors',
+  'POST /doctor': 'DoctorController.getDoctor'
 
 
 };
