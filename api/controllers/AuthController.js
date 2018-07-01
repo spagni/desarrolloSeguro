@@ -96,9 +96,22 @@ module.exports = {
     },
 
     async currentUser(req, res) {
-        const user = await User.findOne({ id: req.user.sub });
+        if (req.headers['access-token']) {
+            jwt.verify(req.headers['access-token'], keys.jwtSecret, (err, decoded) => {
+              if (err) {
+                return res.json(null);
+              }
+              else {
+                req.user = decoded;
+                const user = await User.findOne({ id: req.user.sub });
 
-        res.json(user);
+                res.json(user);
+              }
+            });
+        }
+        else {
+            return res.json(null);
+        }
     }
 };
 
