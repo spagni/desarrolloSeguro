@@ -31,6 +31,9 @@ module.exports.policies = {
     'getAppointmentsByDate': 'verifyToken',
     'deleteAppointment': 'verifyToken',
     'getDoctorAppointments': ['verifyToken','canGetDoctorAppointments']
+  },
+  AppointmentDetailController: {
+    'newAppointmentDetail': ['verifyToken', 'isDoctor']
   }
 
 };

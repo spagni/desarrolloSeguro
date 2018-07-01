@@ -39,7 +39,9 @@ module.exports.routes = {
   'POST /deleteAppointment': 'AppointmentController.deleteAppointment',
   //Doctor routes
   'POST /doctors': 'DoctorController.getAvailableDoctors',
-  'POST /doctor': 'DoctorController.getDoctor'
+  'POST /doctor': 'DoctorController.getDoctor',
+  //AppointmentDetail routes
+  'POST /appointmentDetails': 'AppointmentDetailController.newAppointmentDetail'
 
 
 };

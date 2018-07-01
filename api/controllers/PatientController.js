@@ -33,6 +33,10 @@ module.exports = {
                     coverage: data.coverage,
                     coverageNumber: data.coverageNumber,
                     user: data.userId
+                }).fetch();
+
+                await MedicalRecord.create({
+                    patient: newPatient.id
                 });
             }
             res.json(await Patient.find({user: data.userId}).populate('user'));
