@@ -103,15 +103,14 @@ module.exports = {
               }
               else {
                 req.user = decoded;
-                const user = await User.findOne({ id: req.user.sub });
-
-                res.json(user);
+                
+                res.json(req.user);
               }
             });
-        }
-        else {
+          }
+          else {
             return res.json(null);
-        }
+          }
     }
 };
 
