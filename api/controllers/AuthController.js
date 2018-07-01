@@ -28,7 +28,7 @@ module.exports = {
         }
 
         const userToken = jwt.sign({email: user.email, sub: user.id, role: user.role}, keys.jwtSecret);
-        res.json({ token: userToken });
+        res.json({ token: userToken, role: user.role });
     },
 
     async signUp(req, res) {
