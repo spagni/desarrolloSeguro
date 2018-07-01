@@ -51,7 +51,7 @@ module.exports.datastores = {
     // adapter: 'sails-mysql',
     // url: 'mysql://user:password@host:port/database',
     adapter: 'sails-mongo',
-    url: 'mongodb://localhost:27017/consultorioDB',
-
+    //url: 'mongodb://localhost:27017/consultorioDB',
+    url: 'mongodb://admin:qwer1234@ds223161.mlab.com:23161/heroku_mz94kqhx'
   },
 };

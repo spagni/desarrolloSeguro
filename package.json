@@ -1,7 +1,7 @@
 {
   "name": "desarollo-seguro",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "a Sails application",
   "keywords": [],
   "dependencies": {
@@ -13,7 +13,7 @@
     "nodemon": "^1.17.5",
     "sails": "^1.0.2",
     "sails-hook-orm": "^2.0.0-16",
-    "sails-hook-sockets": "^1.4.0",
+    "sails-hook-sockets": "^1.5.3",
     "sails-mongo": "^1.0.1"
   },
   "devDependencies": {
@@ -28,9 +28,9 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/anonymous node/sails user/desarollo-seguro.git"
+    "url": "https://github.com/spagni/desarrolloSeguro.git"
   },
-  "author": "anonymous node/sails user",
+  "author": "Sebastian Pagni",
   "license": "",
   "engines": {
     "node": ">=10.4"
