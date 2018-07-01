@@ -96,7 +96,7 @@ module.exports = {
     },
 
     async currentUser(req, res) {
-        const user = User.findOne({ id: req.user.sub });
+        const user = await User.findOne({ id: req.user.sub });
 
         res.json(user);
     }
