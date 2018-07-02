@@ -85,14 +85,14 @@ module.exports = {
             
             const patientAppointments = await Appointment.find({ patient: patientId }).populate('doctor');
             
-            res.json(patientAppointments.map(async x => {
-                const doctor = await User.find({id: x.doctor.user.id});
+            res.json(patientAppointments.map(x => {
+                //const doctor = await User.find({id: x.doctor.user.id});
                 return {
                     year: x.year,
                     month: x.month,
                     day: x.day,
                     timeSlot: x.timeSlot,
-                    doctor: doctor,
+                    //doctor: doctor,
                     doctorRegistration: x.doctor.registrationId
                 } 
             }));
