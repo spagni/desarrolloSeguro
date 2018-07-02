@@ -49,16 +49,14 @@ module.exports = {
     async getPatientData(req, res) {
         try {
             if (req.user.role === 'user') {
-                const patient = await Patient.findOne({user: req.user.sub});
+                patient = await Patient.findOne({user: req.user.sub});
                 patientId = patient.id;
             }
             else {
                 //Si lo llama un admin o secretaria, tiene que mandar el id de paciente
                 patientId = req.body.patientId;
-            }
-    
-            const patient = Patient.findOne({id: patientId});
-    
+                patient = await Patient.findOne({id: patientId});
+            }   
             res.json(patient);
         }
         catch(err) {
