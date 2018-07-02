@@ -86,7 +86,7 @@ module.exports = {
             const patientAppointments = await Appointment.find({ patient: patientId }).populate('doctor');
             
             res.json(patientAppointments.map(async x => {
-                const doctor = await User.findOne({id: x.doctor.user});
+                const doctor = await User.findOne({id: x.doctor.user.id});
                 return {
                     year: x.year,
                     month: x.month,
