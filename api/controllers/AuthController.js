@@ -46,7 +46,7 @@ module.exports = {
                 password: user.password,
                 role: 'user'
             }).fetch();
-            const patient = await patient.create({
+            const patient = await Patient.create({
                 dni: user.dni,
                 coverage: user.coverage,
                 coverageNumber: user.coverageNumber,
