@@ -94,7 +94,7 @@ module.exports = {
                     timeSlot: x.timeSlot,
                     doctor: doctor.fullName,
                     doctorRegistration: x.doctor.registrationId
-                }
+                } 
             }));
         }
         catch(err) {
