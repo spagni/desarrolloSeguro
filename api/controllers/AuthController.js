@@ -46,8 +46,15 @@ module.exports = {
                 password: user.password,
                 role: 'user'
             }).fetch();
+            const patient = await patient.create({
+                dni: user.dni,
+                coverage: user.coverage,
+                coverageNumber: user.coverageNumber,
+                user: newUser.id
+            }).fetch();
 
-            res.json(newUser);
+
+            return res.json(await Patient.find({ id: patient.id }).populate('user'));
         }
         catch(err){
             res.status(500).json(err);
