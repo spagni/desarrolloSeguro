@@ -88,12 +88,12 @@ module.exports = {
             
             res.json(patientAppointments.map(x => {
                 return {
-                    year: patientAppointments.year,
-                    month: patientAppointments.month,
-                    day: patientAppointments.day,
-                    timeSlot: patientAppointments.timeSlot,
+                    year: x.year,
+                    month: x.month,
+                    day: x.day,
+                    timeSlot: x.timeSlot,
                     doctor: doctor.fullName,
-                    doctorRegistration: patientAppointments.doctor.registrationId
+                    doctorRegistration: x.doctor.registrationId
                 }
             }));
         }
