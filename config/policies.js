@@ -17,23 +17,23 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  '*': 'verifyToken',
+  '*': ['logger','verifyToken'],
   AuthController: {
-    '*': true,
-    'signUpWithRole': ['verifyToken','isAdmin']
+    '*': 'logger',
+    'signUpWithRole': ['logger','verifyToken','isAdmin']
   },
   PatientController: {
-    'setPatientData': ['verifyToken','canUpdatePatientData']
+    'setPatientData': ['logger','verifyToken','canUpdatePatientData']
   },
   AppointmentController: {
-    'newAppointment': ['verifyToken','hasTwoAppointments'],
-    'getPatientAppointments': 'verifyToken',
-    'getAppointmentsByDate': 'verifyToken',
-    'deleteAppointment': 'verifyToken',
-    'getDoctorAppointments': ['verifyToken','canGetDoctorAppointments']
+    'newAppointment': ['logger','verifyToken','hasTwoAppointments'],
+    'getPatientAppointments': ['logger','verifyToken'],
+    'getAppointmentsByDate': ['logger','verifyToken'],
+    'deleteAppointment': ['logger','verifyToken'],
+    'getDoctorAppointments': ['logger','verifyToken','canGetDoctorAppointments']
   },
   AppointmentDetailController: {
-    'newAppointmentDetail': ['verifyToken', 'isDoctor']
+    'newAppointmentDetail': ['logger','verifyToken', 'isDoctor']
   }
 
 };

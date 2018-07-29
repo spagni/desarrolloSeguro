@@ -51,7 +51,7 @@ module.exports.datastores = {
     // adapter: 'sails-mysql',
     // url: 'mysql://user:password@host:port/database',
     adapter: 'sails-mongo',
-    url: 'mongodb://localhost:27017/consultorioDB',
-    //url: 'mongodb://admin:qwer1234@ds121871.mlab.com:21871/consultorio-db'
+    //url: 'mongodb://localhost:27017/consultorioDB',
+    url: 'mongodb://admin:qwer1234@ds121871.mlab.com:21871/consultorio-db'
   },
 };
